@@ -1,3 +1,6 @@
+# Testing data files
+*.csv
+
 # Temporrary Files
 *~
 *.swp
