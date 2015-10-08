@@ -7,3 +7,5 @@ Description: This package is used to fit W and T (as described by Raup) to a set
 Depends: R (>= 3.1.0)
 License: GPL-3
 LazyData: true
+Imports: dplyr,
+    magrittr
