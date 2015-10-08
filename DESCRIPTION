@@ -1,0 +1,9 @@
+Package: rsnailfitter
+Title: Fitting Raup's W and T to Snail Models
+Version: 0.1
+Authors@R: person("Roman", "Klapaukh", email = "roma@ecs.vuw.ac.nz",
+                  role = c("aut", "cre"))
+Description: This package is used to fit W and T (as described by Raup) to a set of snail measurements.
+Depends: R (>= 3.1.0)
+License: GPL-3
+LazyData: true
