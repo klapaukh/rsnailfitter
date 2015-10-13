@@ -2,7 +2,10 @@
 % Please edit documentation in R/estimate.R
 \name{estimateOverTime}
 \alias{estimateOverTime}
-\title{Estimate W and T based on every pair of points.}
+\title{Estimate W and T based on every pair of points. Since W and T can be
+estimated from any sub part of the shell, this estimates W and T based on
+every possible point being an end point. For each end point, every theta
+value smaller than it acts as a starting point.}
 \usage{
 estimateOverTime(dt)
 }
@@ -11,10 +14,13 @@ estimateOverTime(dt)
 }
 \value{
 A list of data.frames containing W and T estimates for every pair of
-        thetas.
+        thetas. Each list element is named according the final point it used.
 }
 \description{
-Estimate W and T based on every pair of points.
+The data frame that is used in this method must have three columns named
+'theta', 'r', and 'y'. The theta column must be measured in radians. The
+other measurements can be in any set of units as long as they are all the
+same.
 }
 \examples{
 estimateOverTime(snail)
