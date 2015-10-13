@@ -1,4 +1,4 @@
-#' @importFrom magrittr "%>%"
+#' @importFrom magrittr "%<>%"
 
 estimateW <- function(theta, r_theta, r_0) {
   (r_theta/r_0) ^ ( (2*pi) / theta )
@@ -23,7 +23,7 @@ estimateOverTime <- function(dt){
     others %<>% 
       dplyr::mutate(
              w = estimateW(current$theta - theta, current$r, r),
-             t = estimateT(current$theta - theta, current$y, r, w)
+             t = estimateT(current$theta - theta, current$y - y, r, w)
              )
     thisOne = list(others)
     names(thisOne) = as.character(current$theta)
