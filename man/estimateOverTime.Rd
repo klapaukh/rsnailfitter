@@ -6,7 +6,17 @@
 \usage{
 estimateOverTime(dt)
 }
+\arguments{
+\item{dt}{The data frame containing snail measurements}
+}
+\value{
+A list of data.frames containing W and T estimates for every pair of
+        thetas.
+}
 \description{
 Estimate W and T based on every pair of points.
+}
+\examples{
+estimateOverTime(snail)
 }
 
