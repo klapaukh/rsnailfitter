@@ -13,14 +13,16 @@ estimateOverTime(dt)
 \item{dt}{The data frame containing snail measurements}
 }
 \value{
-A list of data.frames containing W and T estimates for every pair of
-        thetas. Each list element is named according the final point it used.
+A data.frame containing W and T estimates for every pair of thetas.
+        In each row, theta is the start theta and theta_end is the end theta.
+        All other columns are preserved.
 }
 \description{
 The data frame that is used in this method must have three columns named
 'theta', 'r', and 'y'. The theta column must be measured in radians. The
 other measurements can be in any set of units as long as they are all the
-same.
+same. Note that this method does not work with data.table due to some scoping
+issue.
 }
 \examples{
 estimateOverTime(snail)

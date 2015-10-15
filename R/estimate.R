@@ -32,15 +32,20 @@ estimateT <- function(theta, y_theta, r_0, W){
 #' The data frame that is used in this method must have three columns named
 #' 'theta', 'r', and 'y'. The theta column must be measured in radians. The
 #' other measurements can be in any set of units as long as they are all the
-#' same. 
+#' same. Note that this method does not work with data.table due to some scoping
+#' issue.
 #' 
 #' @param dt The data frame containing snail measurements
-#' @return A list of data.frames containing W and T estimates for every pair of
-#'         thetas. Each list element is named according the final point it used.
+#' @return A data.frame containing W and T estimates for every pair of thetas. 
+#'         In each row, theta is the start theta and theta_end is the end theta.
+#'         All other columns are preserved.
 #' @export
 #' @examples
 #' estimateOverTime(snail)
 estimateOverTime <- function(dt){
+  if("data.table" %in% class(dt)){
+    warning("May not work with a data.table")
+  }
   allResults = list()
   for(i in 1:nrow(dt)){
     current = dt[i,]
@@ -48,11 +53,10 @@ estimateOverTime <- function(dt){
     others %<>% 
       dplyr::mutate(
              w = estimateW(current$theta - theta, current$r, r),
-             t = estimateT(current$theta - theta, current$y - y, r, w)
+             t = estimateT(current$theta - theta, current$y - y, r, w),
+             theta_end = rep(current$theta,n())
              )
-    thisOne = list(others)
-    names(thisOne) = as.character(current$theta)
-    allResults = c(allResults,thisOne)
+    allResults = c(allResults,list(others))
   }
-  return(allResults)
+  return(data.table::rbindlist(allResults))
 }
